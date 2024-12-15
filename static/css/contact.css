@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  header {
+    background-color: #e9ecec;
+    color: #e9e6e6;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(149, 144, 144, 0.2);
+  }
+
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  nav ul li {
+    margin: 0 20px;
+
+  }
+
+  nav ul li {
+    margin: 0 20px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #3b3636;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover,
+  nav ul li a.active {
+    color: #464d46;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  #contact {
+    background-color: #004d4d;
+    color: white;
+    padding: 50px 20px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .contact-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .info-box {
+    width: 30%;
+  }
+
+  .info-box i {
+    font-size: 2rem;
+    color: #00bfff;
+  }
+
+  .info-box h3 {
+    margin-top: 10px;
+    font-size: 1.5rem;
+  }
+
+  .info-box p {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+
+  .form-section {
+    background-color: #fff;
+    color: #000;
+    padding: 30px;
+    border-radius: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .submit-btn {
+    display: inline-block;
+    background-color: #00bfff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: #0099cc;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .contact-info {
+      flex-direction: column;
+    }
+
+    .info-box {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .form-section {
+      margin-top: 20px;
+    }
+  }

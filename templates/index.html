@@ -1,0 +1,904 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeScreening - AI-Powered Career Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --secondary-color: #10b981;
+            --background-light: #f3f4f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        /* Navbar */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+         /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            color:red;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color:white;
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Authentication Pages */
+        .auth-container {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--background-light);
+        }
+
+        .auth-image {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2563eb 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .auth-image h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-image p {
+            max-width: 400px;
+            opacity: 0.9;
+        }
+
+        .auth-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            background-color: white;
+        }
+
+        .form-container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--background-light);
+            border-radius: 0.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background-color: #3CB371CC;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .form-divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--background-light);
+        }
+
+        .divider-text {
+            margin: 0 1rem;
+            color: var(--text-light);
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            transition: background-color 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background-color: #e5e7eb;
+        }
+
+        .social-btn img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1024px) {
+            .auth-container {
+                flex-direction: column;
+            }
+
+            .auth-image, .auth-form {
+                flex: none;
+                padding: 2rem;
+            }
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+
+        /* Mobile Menu */
+        @media screen and (max-width: 768px) {
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+            }
+
+            .navbar-links.active {
+                display: flex;
+            }
+
+            .navbar-links a {
+                padding: 0.75rem 5%;
+                text-align: center;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                align-items: center;
+            }
+
+            .hamburger-menu.active .hamburger-line:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger-menu.active .hamburger-line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger-menu.active .hamburger-line:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 6rem 5% 3rem;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--background-light) 0%, white 100%);
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+ .about {
+            display: flex;
+            align-items: center;
+            padding: 6rem 5%;
+            background-color: white;
+            gap: 4rem;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .about-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .about-value {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .value-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background-color: var(--background-light);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 4rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 4rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            padding: 4rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--background-light);
+            border-radius: 0.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-submit:hover {
+            background-color: #3CB371CC;
+        }
+
+        /* Responsive Adjustments */
+        @media screen and (max-width: 1024px) {
+            .about, .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image, .contact-info, .contact-form {
+                max-width: 100%;
+            }
+
+            .about-values {
+                grid-template-columns: 1fr;
+            }
+
+            .about-value {
+                justify-content: center;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .contact-info, .contact-form {
+                padding: 2rem;
+            }
+        }
+        /* Features Section */
+        .features {
+            padding: 4rem 5%;
+            background-color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--background-light);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 5%;
+            background-color: var(--background-light);
+        }
+
+        .testimonials-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .testimonial-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+        }
+
+        .testimonial-role {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Testimonials */
+        @media screen and (max-width: 1024px) {
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-title {
+                font-size: 2rem;
+            }
+        }
+        /* Responsive Design */
+        @media screen and (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content, .hero-image {
+            background-color: var(--primary);
+                border-radius: 20px;
+                margin-top:15px ;
+                max-width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-logo">ResumeScreening</div>
+        <div class="hamburger-menu">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </div>
+        <div class="navbar-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <div class="auth-buttons">
+                <a href="/login" class="btn ">Log In</a>
+                <a href="/signup" class="btn btn-secondary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Your AI Career Companion</h1>
+            <p class="hero-subtitle">Elevate your resume, ace your interviews, and unlock your dream career with AI-powered insights and personalized guidance.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Get Started</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="static/image/avatar2.jpg" alt="Resume Screening Dashboard">
+        </div>
+    </section>
+     <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📄</div>
+                <h3>Resume Analysis</h3>
+                <p>Get instant, AI-powered insights to optimize your resume and stand out to employers.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Interview Prep</h3>
+                <p>Practice with AI-generated interview questions tailored to your skills and experience.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Career Matching</h3>
+                <p>Discover job opportunities that perfectly align with your skills and career goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <h2 class="testimonials-title">What Our Users Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"ResumeScreening transformed my job search. The AI insights helped me revamp my resume and land interviews I never thought possible!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JD</div>
+                    <div class="testimonial-details">
+                        <span class="testimonial-name">Nischal kafle</span>
+                        <span class="testimonial-role">Software Engineer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"The interview preparation tools are incredible. I felt so much more confident going into my last interview, and I got the job!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SA</div>
+                    <div class="testimonial-details">
+                        <span class="testimonial-name">Kripanand shah</span>
+                        <span class="testimonial-role">Technical Support</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"As a career changer, ResumeScreening helped me highlight my transferable skills and find the right opportunities."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MR</div>
+                    <div class="testimonial-details">
+                        <span class="testimonial-name">Shreya Niraula</span>
+                        <span class="testimonial-role">App Developer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <section class="about" id="about">
+        <div class="about-content">
+            <h2 class="about-title">About ResumeScreening</h2>
+            <p class="about-description">
+                We're on a mission to revolutionize career development through AI-powered insights. Our platform combines cutting-edge technology with human-centric design to help professionals unlock their full potential.
+            </p>
+            <div class="about-values">
+                <div class="about-value">
+                    <div class="value-icon">🚀</div>
+                    <span>Innovation-Driven</span>
+                </div>
+                <div class="about-value">
+                    <div class="value-icon">🤝</div>
+                    <span>User-Centric</span>
+                </div>
+                <div class="about-value">
+                    <div class="value-icon">🌐</div>
+                    <span>Global Perspective</span>
+                </div>
+                <div class="about-value">
+                    <div class="value-icon">💡</div>
+                    <span>Continuous Learning</span>
+                </div>
+            </div>
+        </div>
+        <div class="about-image">
+            <img src="/api/placeholder/600/400" alt="ResumeScreening Team">
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="contact-title">Get in Touch</h2>
+                <p class="contact-details">
+                    Have questions or need support? We're here to help you navigate your career journey.
+                </p>
+                <div class="contact-detail">
+                    <div class="contact-icon">📍</div>
+                    <span>123 Career Street, Tech City, Innovation District</span>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">✉️</div>
+                    <span>support@resumescreening.ai</span>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">📞</div>
+                    <span>+1 (555) 123-4567</span>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tell us how we can help" required></textarea>
+                </div>
+                <button type="submit" class="contact-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+
+    <script>
+        // Hamburger Menu Toggle
+        function loadContent(page) {
+    const contentDiv = document.getElementById('content');
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${page}.html`);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            contentDiv.innerHTML = xhr.responseText;
+        } else {
+            console.error('Error loading content:', xhr.statusText);
+        }
+    };
+    xhr.send();
+}
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const navbarLinks = document.querySelector('.navbar-links');
+
+        hamburgerMenu.addEventListener('click', () => {
+            hamburgerMenu.classList.toggle('active');
+            navbarLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

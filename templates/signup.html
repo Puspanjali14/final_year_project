@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Reusing the entire CSS from the login page */
+    :root {
+        --primary-color: #3CB371;
+        --secondary-color: #10b981;
+        --background-light: #f3f4f6;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--background-light);
+    }
+
+    /* Authentication Pages */
+    .auth-container {
+        display: flex;
+        min-height: 100vh;
+        background-color: var(--background-light);
+    }
+
+    .auth-image {
+        flex: 1;
+        background: linear-gradient(135deg, var(--primary-color) 0%, #2563eb 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 4rem;
+        text-align: center;
+    }
+
+    .auth-image h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .auth-image p {
+        max-width: 400px;
+        opacity: 0.9;
+    }
+
+    .auth-form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4rem;
+        background-color: white;
+    }
+
+    .form-container {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .form-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--background-light);
+        border-radius: 0.5rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+    }
+
+    .form-submit {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-submit:hover {
+        background-color: #3CB371CC;
+    }
+
+    .form-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+    }
+
+    .form-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 1024px) {
+        .auth-container {
+            flex-direction: column;
+        }
+
+        .auth-image, .auth-form {
+            flex: none;
+            padding: 2rem;
+        }
+    }
+  </style>
+</head>
+<body>
+ <section id="signup">
+     <div class="auth-container">
+        <div class="auth-image">
+            <h2>Create Your Account</h2>
+            <p>Join our platform and start your professional journey with personalized career insights and opportunities.</p>
+        </div>
+        <div class="auth-form">
+            <div class="form-container">
+                <h2 class="form-title">Sign Up</h2>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" required>
+                    </div>
+
+                    <button type="submit" class="form-submit">Sign Up</button>
+
+                    <div class="form-footer">
+                        Already have an account? <a href="/login">Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ </section>
+     <script>
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+
+
+    try {
+        const response = await fetch('/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                fullName,
+                email,
+                password
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            // Store access token and user info in localStorage
+            localStorage.setItem('access_token', result.access_token);
+            localStorage.setItem('user', JSON.stringify(result.user));
+
+            // Redirect to dashboard or onboarding
+            window.location.href = '/dashboard';
+        } else {
+            // Display error message
+            alert(result.message || 'Signup failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    }
+});
+ </script>
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --secondary-color: #10b981;
+            --accent-color: #6366f1;
+            --background-light: #f8fafc;
+            --background-dark: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        label {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        textarea, input[type="file"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            align-self: center;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+
+        button:hover {
+            background-color: #3CB371CC;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 2rem;
+            background-color: var(--background-dark);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+
+        .results h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .results ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .results li {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .results .score {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Match Resumes to Job Description</h1>
+        <form action="/dashboard/matcher" method="post" enctype="multipart/form-data">
+            <label for="job_description">Job Description:</label>
+            <textarea name="job_description" id="job_description" rows="5" placeholder="Paste the job description here..." required></textarea>
+
+            <label for="resumes">Upload Resumes:</label>
+            <input type="file" name="resumes" id="resumes" multiple required>
+
+            <button type="submit">
+                <i class="fas fa-search"></i>
+                Match Resumes
+            </button>
+        </form>
+
+        {% if message %}
+        <div class="results">
+            <p>{{ message }}</p>
+        </div>
+        {% endif %}
+
+        {% if top_resumes %}
+        <div class="results">
+            <h2>Top Matching Resumes:</h2>
+            <ul>
+                {% for resume, score in zip(top_resumes, similarity_scores) %}
+                <li>
+                    <span>{{ resume }}</span>
+                    <span class="score">{{ score }}%</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

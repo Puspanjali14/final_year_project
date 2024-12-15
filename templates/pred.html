@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Screening AI System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --secondary-color: #10b981;
+            --accent-color: #6366f1;
+            --background-light: #f8fafc;
+            --background-dark: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-container {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .intro-container h1 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .intro-container ul {
+            list-style-type: none;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .intro-container li {
+            margin-bottom: 0.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        input[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3CB371CC;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 2rem;
+            background-color: var(--background-dark);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .results h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .results-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .result-item {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container intro-container">
+        <h1>Resume Screening AI Base System</h1>
+        <p class="text-center">This system supports TXT and PDF files, to be uploaded and it will work on the following...</p>
+        <ul>
+            <li>Resume Categorization</li>
+            <li>Resume Job Recommendation</li>
+            <li>Resume Parsing (Information Extraction)</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Upload Your Resume</h2>
+        <form action="/dashboard/pred" method="post" enctype="multipart/form-data">
+            <input type="file" name="resume" accept=".pdf, .txt" required>
+            <input type="submit" value="Submit">
+        </form>
+
+        {% if message %}
+        <div class="results">
+            <p class="text-center">{{ message }}</p>
+        </div>
+        {% endif %}
+
+        {% if predicted_category %}
+        <div class="results">
+            <div class="results-content">
+                <div class="result-item">
+                    <p class="text-center"><strong>Category:</strong> {{ predicted_category }}</p>
+                    <p class="text-center"><strong>Recommended Job:</strong> {{ recommended_job }}</p>
+                </div>
+
+                <hr>
+
+                <h2 class="text-center">Extracted Information</h2>
+                <div class="result-item">
+                    <p class="text-center"><strong>Name:</strong> {{ name }}</p>
+                    <p class="text-center"><strong>Phone No:</strong> {{ phone }}</p>
+                    <p class="text-center"><strong>Email:</strong> {{ email }}</p>
+                </div>
+
+                {% if extracted_skills %}
+                <div class="result-item">
+                    <h2 class="text-center">Skills</h2>
+                    <ul class="text-center" style="list-style-type: none; padding: 0;">
+                        {% for skill in extracted_skills %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <div class="result-item">
+                    <p class="text-center">No skills found...</p>
+                </div>
+                {% endif %}
+
+                {% if extracted_education %}
+                <div class="result-item">
+                    <h2 class="text-center">Education</h2>
+                    <ul class="text-center" style="list-style-type: none; padding: 0;">
+                        {% for edu in extracted_education %}
+                        <li>{{ edu }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% else %}
+                <div class="result-item">
+                    <p class="text-center">No education found...</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

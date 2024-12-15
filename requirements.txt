@@ -1,0 +1,15 @@
+flask
+scikit-learn
+flask-sqlalchemy
+PYPDF2
+flask-login
+flask-jwt-extended
+werkzeug
+dotenv
+pickle
+secrets
+flask_mysqldb
+docx2txt
+os
+flask_login
+re

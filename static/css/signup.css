@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(45deg, #6c6a71, #c9c9c9);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    max-width: 1000px;
+    height: 500px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.form-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.signin-container, .signup-container {
+    width: 50%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #dcdce0, #05385a);
+    color: white;
+}
+
+.signup-container {
+    background: white;
+    color: black;
+    padding: 30px;
+    justify-content: flex-start;
+}
+
+.signup-container h2 {
+    color: #42a5f5;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.social-icons a {
+    color: #333;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #42a5f5;
+}
+
+input {
+    width: 80%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus {
+    border-color: #42a5f5;
+}
+
+.btn {
+    background: #42a5f5;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #66bb6a;
+}
+
+.signin-btn {
+    margin-top: 20px;
+}
+
+.signup-btn {
+    width: 85%;
+    margin-top: 20px;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .signin-container, .signup-container {
+        width: 100%;
+    }
+
+    .container {
+        width: 90%;
+        height: auto;
+    }
+
+    .signup-container {
+        padding: 20px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        height: auto;
+    }
+
+    .signin-container, .signup-container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+    }
+
+    .social-icons a {
+        font-size: 20px;
+    }
+}
